@@ -1,0 +1,31 @@
+# KiCad temporary & backup files
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-save.kicad_pcb
+*-save.kicad_sch
+*.bck
+*.lck
+*.tmp
+_autosave-*
+*.kicad_prl
+
+# Arduino & PlatformIO build outputs
+.pio/
+.vscode/
+build/
+*.hex
+*.bin
+*.elf
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.spec
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Nn]es.sys
+desktop.ini

@@ -1,0 +1,11 @@
+(version 1)
+
+(rule "Infineon_NPTH_Clearance"
+	(constraint hole_clearance (min 0.2mm))
+	(condition "A.insideCourtyard('MIC_INF')")
+)
+
+(rule "Dual_Header_Courtyard"
+	(constraint courtyard_clearance (min -5mm))
+	(condition "A.insideCourtyard('J_ESP*') && B.insideCourtyard('J_ESP*')")
+)
