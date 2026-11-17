@@ -31,9 +31,9 @@ flowchart LR
     end
 
     subgraph RightEdge["Right Board Edge (User Interface & External Ports)"]
-        OLED["OLED 0.91\" (Vertical 1x04 Socket, 100% Enclosed)"]
-        SD["MicroSD Slot (Faces Right Wall ->)"]
-        DAC["PCM5102A DAC (Headphone Jack at Top-Right ->)"]
+        OLED["0.91-inch OLED (Vertical 1x04 Socket, 100% Enclosed)"]
+        SD["MicroSD Slot (Faces Right Wall Outward)"]
+        DAC["PCM5102A DAC (Headphone Jack at Top-Right Outward)"]
         ENC["EC11 Rotary Encoder (Bottom Right)"]
     end
 

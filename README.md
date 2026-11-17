@@ -99,10 +99,10 @@ flowchart TD
     end
 
     subgraph UI_Right["User Interface & Peripherals (Right Bay)"]
-        ESP -- "I2C (IO8/SDA, IO9/SCK)" --> OLED["0.91\" SSD1306 OLED (128x32)"]
-        ESP -- "SPI (IO10-13)" --> SD["MicroSD Push-Push Slot (Facing Right ->)"]
+        ESP -- "I2C (IO8/SDA, IO9/SCK)" --> OLED["0.91-inch SSD1306 OLED (128x32)"]
+        ESP -- "SPI (IO10-13)" --> SD["MicroSD Push-Push Slot (Facing Rightward)"]
         DSP -- "I2S TX (IO15-17)" --> DAC["PCM5102A 32-Bit DAC"]
-        DAC --> PHONE["3.5mm Headphone Jack (Top-Right ->)"]
+        DAC --> PHONE["3.5mm Headphone Jack (Top-Right Outward)"]
         ENC["EC11 Encoder (IO4-6)"] --> ESP
         BTNS["Tactile Buttons (IO1, 3, 7, 21)"] --> ESP
     end
