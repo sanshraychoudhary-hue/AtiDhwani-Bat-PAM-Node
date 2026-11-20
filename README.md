@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Hardware: KiCad 10](https://img.shields.io/badge/Hardware-KiCad%2010-orange.svg)](hardware/kicad/)
-[![PCB: Revision v3.1](https://img.shields.io/badge/PCB-Revision%20v3.1%20(DRC%200%20Errors)-brightgreen.svg)](hardware/)
+[![PCB: Revision v3.2](https://img.shields.io/badge/PCB-Revision%20v3.2%20(Routed%20--%200%20DRC%20Errors)-brightgreen.svg)](hardware/)
 [![Firmware: ESP32--S3](https://img.shields.io/badge/Firmware-ESP32--S3%20Xtensa-red.svg)](firmware/)
 [![Sampling: 192kHz / 24--bit](https://img.shields.io/badge/Audio-192%20kHz%20%2F%2024--bit-purple.svg)](docs/ARCHITECTURE.md)
 
@@ -12,15 +12,15 @@ Designed for wildlife ecologists, bioacoustic researchers, conservationists, and
 
 ---
 
-## Visual Preview (Hardware Revision v3.1)
+## Visual Preview (Hardware Revision v3.2 — Fully Routed)
 
-| Top-Down View | 3D Perspective Render |
+| Top View (Routed Traces) | Bottom Layer (Power & Ground Pours) |
 | :---: | :---: |
-| ![Top View](assets/renders/carrier_top_render_v3.1.png) | ![Perspective View](assets/renders/carrier_iso_render_v3.1.png) |
+| ![Top View](assets/renders/carrier_routed_top_render.png) | ![Bottom View](assets/renders/carrier_routed_bottom_render.png) |
 
-| Outward Headphone Jack & 180° DAC | Outward MicroSD & Vertical OLED |
+| 3D Perspective (Complete Board) | Outward Ports (Jack & MicroSD) |
 | :---: | :---: |
-| ![DAC Zoom](assets/renders/carrier_dac_zoom_v3.1.png) | ![Right Edge Zoom](assets/renders/carrier_right_edge_zoom_v3.1.png) |
+| ![Perspective View](assets/renders/carrier_routed_iso_render.png) | ![DAC Zoom](assets/renders/carrier_dac_zoom_v3.1.png) |
 
 ---
 
