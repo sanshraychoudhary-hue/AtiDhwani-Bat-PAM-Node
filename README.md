@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Hardware: KiCad 10](https://img.shields.io/badge/Hardware-KiCad%2010-orange.svg)](hardware/kicad/)
-[![PCB: Revision v3.2](https://img.shields.io/badge/PCB-Revision%20v3.2%20(Routed%20--%200%20DRC%20Errors)-brightgreen.svg)](hardware/)
+[![PCB: Revision v3.3 Compact](https://img.shields.io/badge/PCB-Revision%20v3.3%20(Compact%2098x98mm%20--%200%20DRC%20Errors)-brightgreen.svg)](hardware/)
 [![Firmware: ESP32--S3](https://img.shields.io/badge/Firmware-ESP32--S3%20Xtensa-red.svg)](firmware/)
 [![Sampling: 192kHz / 24--bit](https://img.shields.io/badge/Audio-192%20kHz%20%2F%2024--bit-purple.svg)](docs/ARCHITECTURE.md)
 
@@ -12,15 +12,19 @@ Designed for wildlife ecologists, bioacoustic researchers, conservationists, and
 
 ---
 
-## Visual Preview (Hardware Revision v3.2 — Fully Routed)
+## Visual Preview (Hardware Revision v3.3 Compact — 98×98 mm)
 
-| Top View (Routed Traces) | Bottom Layer (Power & Ground Pours) |
+| Top View (389 Routed Traces) | Bottom Layer (Power & Ground Pours) |
 | :---: | :---: |
-| ![Top View](assets/renders/carrier_routed_top_render.png) | ![Bottom View](assets/renders/carrier_routed_bottom_render.png) |
+| ![Top View](assets/renders/carrier_v3_3_top_render.png) | ![Bottom View](assets/renders/carrier_v3_3_bottom_render.png) |
 
-| 3D Perspective (Complete Board) | Outward Ports (Jack & MicroSD) |
+| 3D Perspective (Complete Board) | AD828 Preamp Sockets & Under-ESP32 Console |
 | :---: | :---: |
-| ![Perspective View](assets/renders/carrier_routed_iso_render.png) | ![DAC Zoom](assets/renders/carrier_dac_zoom_v3.1.png) |
+| ![Perspective View](assets/renders/carrier_v3_3_iso_render.png) | ![AD828 Preamp Zoom](assets/renders/carrier_v3_3_ad828_zoom.png) |
+
+| Overhanging Right Edge (Jack, SD, OLED) |
+| :---: |
+| ![Right Edge Zoom](assets/renders/carrier_v3_3_right_edge_zoom.png) |
 
 ---
 
@@ -30,14 +34,17 @@ Commercial ultrasonic bat detectors and long-term acoustic loggers (such as the 
 
 **AtiDhwani bridges this gap:**
 * **BOM Cost Under $40 USD:** Built entirely using readily available commodity modules, surface-mount MEMS transducers, and standard 2-layer FR-4 fabrication.
+* **Sub-100mm Budget Carrier ($98.0 \times 98.0\text{ mm}$):** Optimized specifically to qualify for ultra-low-cost fabrication tiers (e.g. $2 JLCPCB / PCBWay specials) while preserving full mechanical clearance.
+* **Dual-Stage Ultrasonic Front-End with AD828 Preamp:**
+  * **Stage 1 (Bench testing & close roosts):** Direct AC-coupled output from Knowles & Infineon MEMS microphones into the WM8782 ADC.
+  * **Stage 2 (Distant foraging bats outdoors):** Plug-in female header sockets for a dual-channel AD828 low-noise operational amplifier module (powered from regulated 5V VBUS), boosting faint, distant ultrasonic calls by 20–30 dB before digitization.
+* **Under-ESP32 Audio Interconnect Console:** Direct female sockets for WM8782 ADC (`J_ADC1`), Preamp Out (`J_PREAMP_OUT`), and Mic Out (`J_MIC_OUT`) concentrated beneath the ESP32-S3 module, keeping high-speed 192 kHz I2S digital audio lines under 10 mm.
 * **True 192 kHz 24-Bit Ultrasonic Capture:** External Wolfson WM8782 stereo ADC operating in hardware Master Mode with dedicated 24.576 MHz crystal oscillator.
 * **Real-Time Heterodyne Listening:** Tunable local oscillator ($15\text{ kHz} - 90\text{ kHz}$) mixed directly in DSP, down-converting ultrasound to human-audible frequencies with zero latency.
-* **Dual-Microphone Front-End:** Dual wideband MEMS sensors (Knowles SPV0142 and Infineon IM70A135) powered by an ultra-low-noise 2.8V linear regulator.
-* **Field-Ready 3D Enclosure Alignment (v3.1):** 
-  * MicroSD card slot opens directly outward to the right edge.
-  * 3.5mm stereo headphone jack oriented towards the upper-right board perimeter.
-  * 0.91" OLED display mounted vertically, remaining 100% enclosed within the PCB boundary.
-  * Stand-mounted TP4056 USB-C charger and XL3608 5V boost converter.
+* **Overhanging Field Peripherals:** 
+  * MicroSD card slot and 3.5mm stereo headphone jack overhang the right PCB perimeter for effortless enclosure mounting.
+  * 0.91" OLED display mounted vertically on the right perimeter for clear night-time status viewing.
+  * Sockets for TP4056 USB-C charger and XL3608 5V step-up boost converter.
 
 ---
 
@@ -48,17 +55,18 @@ Commercial ultrasonic bat detectors and long-term acoustic loggers (such as the 
 | **Acoustic Range** | **10 kHz to 96 kHz** (Nyquist limit at 192 kHz sampling rate) |
 | **Microphones** | Knowles SPV0142LR5H-1 ($10 - 80+\text{ kHz}$) + Infineon IM70A135 ($70\text{ dB(A)}$ SNR) |
 | **Microphone Supply** | AP2127K-2.8 Ultra-Low-Noise LDO ($2.8\text{ V}$, high PSRR) |
+| **Ultrasonic Preamp** | On-board female socket for AD828 Dual Op-Amp Module (3.8V–15V supply, 20–30 dB gain stage) |
 | **Audio ADC** | Wolfson / Cirrus Logic WM8782 (24-bit, 192 kHz stereo, Master Clocked) |
 | **Compute Engine** | ESP32-S3 Dual-Core Xtensa LX7 @ 240 MHz + **8MB Octal PSRAM (N16R8)** |
 | **Audio DAC** | TI / Burr-Brown PCM5102A (32-bit, integrated charge pump, $2.1\text{ V}_{\text{RMS}}$ line/headphone out) |
-| **Audio Outputs** | 3.5mm stereo headphone jack + duplicate expansion header pins |
-| **Storage** | MicroSD slot (FAT32 filesystem, sustained DMA WAV logging up to 192 kHz) |
+| **Audio Outputs** | 3.5mm stereo headphone jack (overhanging right edge) + duplicate breakout headers |
+| **Storage** | MicroSD slot (overhanging right edge, FAT32 filesystem, sustained DMA WAV logging) |
 | **Display** | 0.91" 128×32 SSD1306 OLED (I2C at 400 kHz) |
 | **User Controls** | 1× EC11 rotary encoder with push switch + 4× tactile buttons (Record, Display, Freq UP, Freq DOWN) |
 | **Power Supply** | Single-cell 3.7V Li-Ion / 18650 battery via 2-pin JST-PH or header |
 | **Charging & Boost** | On-board sockets for TP4056 (USB-C 1A) and XL3608 5V step-up boost module |
 | **Telemetry** | Integrated 1:2 battery voltage divider ($100\text{ k}\Omega / 100\text{ k}\Omega \pm 1\%$) with $2.2\text{ nF}$ filter on GPIO2 |
-| **PCB Dimensions** | $120.0\text{ mm} \times 106.0\text{ mm}$ (2-layer FR-4, 1.6 mm thickness, 1 oz Cu) |
+| **PCB Dimensions** | **98.0 mm × 98.0 mm** (Sub-100mm tier, 2-layer FR-4, 1.6 mm thickness, 1 oz Cu, 0 DRC violations) |
 
 ---
 
@@ -71,38 +79,34 @@ flowchart TD
         TP --> SW["SPDT Power Switch"]
         SW --> BOOST["XL3608 5V Step-Up Boost"]
         SW --> GAUGE["100k/100k Divider + 2.2nF Filter"]
-        BOOST --> V5["5V System Rail"]
+        BOOST --> V5["5V System Rail (VBUS)"]
         GAUGE --> IO2["ESP32-S3 GPIO 2 (ADC1)"]
     end
 
-    subgraph Acoustic["Ultrasonic Front-End (Left Bay)"]
+    subgraph Acoustic["Ultrasonic Front-End"]
         LDO["AP2127K-2.8V Low-Noise LDO"] --> MIC1["Knowles SPV0142 (10-80kHz)"]
         LDO --> MIC2["Infineon IM70A135 (High-SNR)"]
         MIC1 --> C1["2.2µF AC Coupling"]
         MIC2 --> C2["2.2µF AC Coupling"]
         C1 --> J_MIC["J_MIC_OUT (1x03 Header)"]
         C2 --> J_MIC
-        J_MIC --> RCA["WM8782 ADC Analog RCA Inputs"]
-    end
-
-    subgraph Digital_ADC["24-Bit Audio ADC (WM8782)"]
-        RCA --> ADC["WM8782 ADC Core (Master Mode, 192kHz)"]
-        ADC -- "LRCK (IO41)" --> ESP
-        ADC -- "DATA (IO40)" --> ESP
-        ADC -- "BICK (IO39)" --> ESP
+        J_MIC --> PREAMP["AD828 Op-Amp Preamp Module (Optional 20-30dB Boost)"]
+        PREAMP --> J_PRE["J_PREAMP_OUT (1x03 Header)"]
+        J_PRE --> ADC["WM8782 ADC (Master Mode, 192kHz / 24-bit)"]
+        J_MIC -. "Direct Bypass (Stage 1)" .-> ADC
     end
 
     subgraph Core["ESP32-S3 Dual-Core Xtensa LX7 (240MHz, 8MB PSRAM)"]
-        ESP["ESP32-S3 Core & DMA Engines"]
+        ADC -- "I2S RX (IO39 BICK, IO40 DATA, IO41 LRCK)" --> ESP["ESP32-S3 Core & DMA Engines"]
         ESP --> DSP["Real-Time DSP (Heterodyne, Div-by-N, FFT)"]
         ESP --> REC["FAT32 WAV File Writer (Ring Buffer)"]
     end
 
-    subgraph UI_Right["User Interface & Peripherals (Right Bay)"]
+    subgraph UI_Right["User Interface & Peripherals (Right Overhang)"]
         ESP -- "I2C (IO8/SDA, IO9/SCK)" --> OLED["0.91-inch SSD1306 OLED (128x32)"]
-        ESP -- "SPI (IO10-13)" --> SD["MicroSD Push-Push Slot (Facing Rightward)"]
+        ESP -- "SPI (IO10-13)" --> SD["MicroSD Push-Push Slot"]
         DSP -- "I2S TX (IO15-17)" --> DAC["PCM5102A 32-Bit DAC"]
-        DAC --> PHONE["3.5mm Headphone Jack (Top-Right Outward)"]
+        DAC --> PHONE["3.5mm Headphone Jack"]
         ENC["EC11 Encoder (IO4-6)"] --> ESP
         BTNS["Tactile Buttons (IO1, 3, 7, 21)"] --> ESP
     end
