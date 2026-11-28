@@ -1,7 +1,8 @@
 // ==============================================================================
 // AtiDhwani Ultrasonic Bat PAM Node & Detector — Parametric 3D Enclosure
-// Revision: v3.3 Compact (Fits 98.0 mm x 98.0 mm Motherboard + Dual 18650 Pack)
-// License: CERN-OHL-P / MIT Open Hardware
+// Revision: v3.3-SC26 Compact (Fits 98.0 mm x 98.0 mm Motherboard + 1S2P Pack)
+// Author: Sanshray Choudhary (SC26)
+// Origin: github.com/sanshraychoudhary-hue/AtiDhwani-Bat-PAM-Node
 // ==============================================================================
 // Set which part to render:
 // "assembly"  : Complete assembled view
@@ -184,6 +185,11 @@ module base_shell() {
         translate([outer_w/2 - wall_thick - 1, headphone_y, base_floor + standoff_h + 1.0])
             rotate([0, 90, 0])
                 cylinder(d=7.5, h=wall_thick + 4);
+                
+        // HIDDEN FLOOR CANARY: 0.25mm recessed under battery pack
+        translate([-23.5, 0, base_floor - 0.25])
+            linear_extrude(0.4)
+                text("SC26", size=5.0, halign="center", valign="center");
                 
         // BOTTOM EXTERIOR: 1/4"-20 Camera Tripod Nut Trap (Standard PAM tree/tripod mount)
         translate([0, 0, -1])

@@ -5,6 +5,7 @@
 
 #define FFT_SIZE       256
 #define FFT_HALF       (FFT_SIZE / 2)
+#define DSP_PROFILE_ID "FFT256-SC26"
 
 class UltrasonicFFT {
 public:

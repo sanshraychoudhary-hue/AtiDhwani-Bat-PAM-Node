@@ -3,8 +3,10 @@
 #include <Arduino.h>
 
 // ------------------------------------------------------------------------------
-// HARDWARE PINOUT (VERIFIED 2-LAYER ZERO-PCB BUILD)
+// HARDWARE PINOUT (VERIFIED CARRIER v3.3-SC26)
 // ------------------------------------------------------------------------------
+#define HW_BOARD_REV      "v3.3-SC26"
+static const char FW_BUILD_SIG[] PROGMEM = "ADW-V33-SC26-SANSHRAY";
 #define OLED_WIDTH        128
 #define OLED_HEIGHT       32
 #define OLED_RESET        -1

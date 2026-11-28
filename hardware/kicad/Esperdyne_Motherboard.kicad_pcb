@@ -7,6 +7,14 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "AtiDhwani Bat PAM Carrier Motherboard")
+		(date "2026-11-28")
+		(rev "v3.3-SC26")
+		(company "Sanshray Choudhary (SC26)")
+		(comment 1 "Author: Sanshray Choudhary | AtiDhwani Ultrasonic PAM Node")
+		(comment 2 "Canary: SC26")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" signal)
@@ -2753,6 +2761,17 @@
 				)
 			)
 		)
+		(property "Designer" "Sanshray Choudhary (SC26)"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "fe11576f-ceed-4c9f-8656-2cb730c04726")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4935,6 +4954,17 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c6fff73a-114a-480c-b8d1-0b27837c9ad7")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Designer" "Sanshray Choudhary (SC26)"
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "4c290276-b380-4559-a12b-23a8cf84d8e6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8307,6 +8337,40 @@
 		(layer "Edge.Cuts")
 		(uuid "a0a0eb60-bf91-4309-8e31-68edb529c744")
 	)
+	(gr_text "SC26"
+		(at 153 110 0)
+		(layer "F.Cu")
+		(uuid "1c4366db-3e27-49a4-a238-4c4bc7cb7843")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.22)
+			)
+		)
+	)
+	(gr_text "SC26"
+		(at 147 112 0)
+		(layer "B.Cu")
+		(uuid "ace32213-c87d-4b61-b9a8-59e10e54f802")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.22)
+			)
+			(justify mirror)
+		)
+	)
+	(gr_text "v3.3-SC26"
+		(at 186 196.2 0)
+		(layer "F.SilkS")
+		(uuid "bb4765cd-a06e-485c-bd55-34cb360e4b23")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.14)
+			)
+		)
+	)
 	(gr_text "PWR SW"
 		(at 105 161 0)
 		(layer "F.SilkS")
@@ -8735,6 +8799,39 @@
 			(font
 				(size 1.2 1.2)
 				(thickness 0.2)
+			)
+		)
+	)
+	(gr_text "AtiDhwani v3.3 Compact | Designed by Sanshray Choudhary (SC26)"
+		(at 149 102 0)
+		(layer "Cmts.User")
+		(uuid "65d526b3-4d35-4dc2-ac5e-029d59d76f82")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(gr_text "Origin: github.com/sanshraychoudhary-hue/AtiDhwani-Bat-PAM-Node [SC26]"
+		(at 149 106 0)
+		(layer "Eco1.User")
+		(uuid "c44027c5-33bb-47a1-bd2a-9684a35db654")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(gr_text "Author: Sanshray Choudhary | Build: SC26"
+		(at 149 104 0)
+		(layer "F.Fab")
+		(uuid "3c7002a0-a8c9-45ab-b868-ffd7f89ca23f")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
 			)
 		)
 	)
