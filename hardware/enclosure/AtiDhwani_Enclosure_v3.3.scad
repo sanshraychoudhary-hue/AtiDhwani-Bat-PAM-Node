@@ -118,17 +118,28 @@ module base_shell() {
                 }
             }
             
-            // Pro-Range 1S2P Battery Pack Retention Cradle
-            translate([0, 0, base_floor])
+            // OPTION 1 DUAL-BAY BASEMENT:
+            // Bay 1 (Left): Pro-Range 1S2P Battery Pack Cradle (41 x 72 mm)
+            translate([-23.5, 0, base_floor])
                 difference() {
-                    rounded_box(batt_pocket_w + 2*batt_wall_t, batt_pocket_l + 2*batt_wall_t, batt_wall_h, 3.0);
+                    rounded_box(batt_pocket_w + 3.0, batt_pocket_l + 3.0, batt_wall_h, 2.5);
                     rounded_box(batt_pocket_w, batt_pocket_l, batt_wall_h + 2, 2.0);
                     // Wire exit notch toward toggle switch & J_BATT
                     translate([-batt_pocket_w/2, 15.0, batt_wall_h/2])
-                        cube([12.0, 16.0, batt_wall_h + 2], center=true);
+                        cube([8.0, 14.0, batt_wall_h + 2], center=true);
                     // Retention strap slots
-                    translate([0, -15.0, 1.5]) cube([batt_pocket_w + 10.0, 5.0, 3.0], center=true);
-                    translate([0, 15.0, 1.5]) cube([batt_pocket_w + 10.0, 5.0, 3.0], center=true);
+                    translate([0, -15.0, 1.5]) cube([batt_pocket_w + 8.0, 5.0, 3.0], center=true);
+                    translate([0, 15.0, 1.5]) cube([batt_pocket_w + 8.0, 5.0, 3.0], center=true);
+                }
+                
+            // Bay 2 (Right): WM8782 24-bit 192kHz ADC Module Cradle (37 x 62 mm)
+            translate([23.5, 0, base_floor])
+                difference() {
+                    rounded_box(37.0 + 3.0, 62.0 + 3.0, batt_wall_h, 2.5);
+                    rounded_box(37.0, 62.0, batt_wall_h + 2, 2.0);
+                    // Wire notch facing top directly towards J_ADC1
+                    translate([0, 31.0, batt_wall_h/2])
+                        cube([16.0, 8.0, batt_wall_h + 2], center=true);
                 }
         }
         
