@@ -74,9 +74,12 @@ btn_disp_x     = 1.0;
 btn_up_x       = 12.0;
 btn_down_x     = 23.0;
 
-// Dual 18650 Battery Cradle Geometry
-cell_dia       = 18.5;
-cell_len       = 68.0;
+// Pro-Range INR 18650 3.7V 5000mAh 1S2P Li-Ion Battery Pack (Robu SKU: R193689)
+// Pre-assembled shrink-wrapped dual-cell block with internal protection board
+batt_pocket_w = 41.0;   // 38.5mm pack width + 2.5mm clearance
+batt_pocket_l = 72.0;   // 68.5mm pack length + 3.5mm wire clearance
+batt_wall_h   = 8.0;    // 8mm perimeter retaining wall
+batt_wall_t   = 2.0;    // 2mm cradle wall thickness
 
 // ==============================================================================
 // Module Definitions
@@ -115,20 +118,17 @@ module base_shell() {
                 }
             }
             
-            // Dual 18650 Battery Cradle Saddles
-            translate([-10.0, 0, base_floor])
+            // Pro-Range 1S2P Battery Pack Retention Cradle
+            translate([0, 0, base_floor])
                 difference() {
-                    cube([12.0, cell_len + 4.0, 8.0], center=true);
-                    translate([0, 0, cell_dia/2])
-                        rotate([90, 0, 0])
-                            cylinder(d=cell_dia, h=cell_len + 10.0, center=true);
-                }
-            translate([10.0, 0, base_floor])
-                difference() {
-                    cube([12.0, cell_len + 4.0, 8.0], center=true);
-                    translate([0, 0, cell_dia/2])
-                        rotate([90, 0, 0])
-                            cylinder(d=cell_dia, h=cell_len + 10.0, center=true);
+                    rounded_box(batt_pocket_w + 2*batt_wall_t, batt_pocket_l + 2*batt_wall_t, batt_wall_h, 3.0);
+                    rounded_box(batt_pocket_w, batt_pocket_l, batt_wall_h + 2, 2.0);
+                    // Wire exit notch toward toggle switch & J_BATT
+                    translate([-batt_pocket_w/2, 15.0, batt_wall_h/2])
+                        cube([12.0, 16.0, batt_wall_h + 2], center=true);
+                    // Retention strap slots
+                    translate([0, -15.0, 1.5]) cube([batt_pocket_w + 10.0, 5.0, 3.0], center=true);
+                    translate([0, 15.0, 1.5]) cube([batt_pocket_w + 10.0, 5.0, 3.0], center=true);
                 }
         }
         
